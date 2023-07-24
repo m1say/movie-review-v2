@@ -1,3 +1,6 @@
 from django.contrib import admin
+from main.apps.movie_review.models import MovieReview
 
-# Register your models here.
+@admin.register(MovieReview)
+class MovieReviewAdmin(admin.ModelAdmin):
+    pass
