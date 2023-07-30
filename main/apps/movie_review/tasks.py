@@ -6,11 +6,11 @@ from main.apps.movie_review.models import MovieReview
 
 logger = logging.getLogger(__name__)
 
+
 @app.task(bind=True)
 def sync_movie_reviews(self):
     api_client = NYTimesAPIClient(
-        host=settings.NY_TIMES_HOST,
-        api_key=settings.NY_TIMES_API_KEY
+        host=settings.NY_TIMES_HOST, api_key=settings.NY_TIMES_API_KEY
     )
 
     results = api_client.get_movie_reviews()
