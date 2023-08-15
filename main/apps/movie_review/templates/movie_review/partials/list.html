@@ -1,13 +1,13 @@
 {% if reviews %}
-<div class="d-flex flex-wrap">
+<div class="d-flex flex-wrap justify-content-start">
   {% for review in reviews %}
-  <div class="card" style="width: 18rem; height: 18rem; margin:1rem;">
+  <div class="card border-primary border-3 m-3" style="width: 18rem; height: 22rem;">
     {% if review.image %}
-      <img src="{{review.image.url}}" class="object-fit-cover overflow-hidden"/>
+      <img src="{{review.image.url}}" class="object-fit-cover overflow-hidden" style="height: 16rem;"/>
     {% endif %}
-    <div class="card-body d-flex flex-column justify-content-between">
+    <div class="card-body d-flex flex-column justify-content-end">
       <p class="card-title">{{review.title | truncatechars_html:30}}</p>
-      <a href="{{review.link}}" target="_blank" class="btn btn-primary">View</a>
+      <a href="{{review.link}}" target="_blank" class="btn btn-primary mb-2">View</a>
       <a hx-get="{% url 'moviereviews:update' review.id %}" hx-swap="innerHTML" hx-target="#update-modal-content" class="btn btn-primary">Update</a>
     </div>
   </div>

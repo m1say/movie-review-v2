@@ -11,7 +11,7 @@ class IndexView(ListView):
     template_name = "movie_review/index.html"
     context_object_name = "reviews"
     model = MovieReview
-    paginate_by = 10
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         kwargs["form"] = MovieReviewForm()

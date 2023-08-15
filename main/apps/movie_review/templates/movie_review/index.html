@@ -1,14 +1,7 @@
 {% extends "base.html" %} 
-{% load static %}
 
 {% block title %} Movie Reviews {% endblock %} 
 {% block content %}
-<nav class="navbar navbar-light bg-light p-2">
-  <a class="navbar-brand" href="{% url 'moviereviews:index' %}">
-    <img src="{% static 'movie_review/popcorn.png' %}" width="30" height="30" class="d-inline-block align-top mx-2" alt="popcorn">
-    Movie Reviews
-  </a>
-</nav>
 <div class="d-flex justify-content-between p-2">
   <div class="d-inline-flex">
     <label for="search-title" class="my-2"> 
