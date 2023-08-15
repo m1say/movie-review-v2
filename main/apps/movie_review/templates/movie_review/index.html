@@ -20,7 +20,7 @@
       type="search" 
       name="title"
       hx-get="{% url 'moviereviews:search' %}"
-      hx-trigger="keyup changed delay:100ms, search" 
+      hx-trigger="keyup changed delay:100ms, search from:body" 
       hx-target="#review-list"
       hx-indicator=".htmx-indicator"
     >
@@ -28,12 +28,18 @@
       Searching... 
     </span> 
   </div>
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#review-modal">
+  <button 
+    type="button" 
+    class="btn btn-primary" 
+    data-bs-toggle="modal" 
+    data-bs-target="#modal" 
+  >
     Create review
   </button>
 </div>
 <div id="review-list">
-  {% include 'movie_review/partials/reviews.html' %}
+  {% include 'movie_review/partials/list.html' %}
 </div>
-  {% include 'movie_review/partials/review_form.html' %}
+{% include 'movie_review/partials/forms/create.html' %}
+{% include 'movie_review/partials/forms/update.html' %}
 {% endblock %}

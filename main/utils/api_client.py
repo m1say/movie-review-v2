@@ -1,5 +1,6 @@
 import logging
 from time import sleep
+from django.conf import settings
 import requests
 import re
 from requests import HTTPError
@@ -106,6 +107,8 @@ class NYTimesAPIClient:
         params = {"query": query, "api-key": self.api_key}
 
         reviews = []
+        limit = settings.NY_TIMES_DATA_LIMIT
+
         while True:
             params["offset"] = offset
             response = self.session.request("GET", url=url, params=params)
@@ -114,17 +117,21 @@ class NYTimesAPIClient:
             reviews.extend(data["results"] or [])
             if not data["has_more"]:
                 break
+
             offset += data["num_results"]
-            if offset >= 100:
+
+            print(f"{offset=}")
+            if limit and offset >= limit:
                 break
+
             sleep(5)  # avoid 429
 
         return reviews
 
 
 if __name__ == "__main__":
+    settings.NY_TIMES_DATA_LIMIT = 5
     host = "mock://api.nytimes.com"
     api_key = ""
-
     api_client = NYTimesAPIClient(host=host, api_key=api_key)
     movie_reviews = api_client.get_movie_reviews()

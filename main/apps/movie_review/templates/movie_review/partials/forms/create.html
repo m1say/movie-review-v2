@@ -1,0 +1,34 @@
+{% load crispy_forms_tags %}
+
+<div 
+  class="modal fade" 
+  tabindex="-1" 
+  id="modal" 
+  aria-labelledby="modal-label" 
+  aria-hidden="true"
+  _="on closeModal trigger search then $('#modal').modal('hide')"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1
+          class="modal-title fs-5" 
+          id="modal-label"
+        >
+          Movie Review
+        </h1>
+        <button 
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="modal-close"
+        >
+        </button>
+      </div>
+      {% crispy form %}
+    </div>
+  </div>
+</div>
+
+<block

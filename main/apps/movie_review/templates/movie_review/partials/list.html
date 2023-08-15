@@ -2,17 +2,23 @@
 <div class="d-flex flex-wrap">
   {% for review in reviews %}
   <div class="card" style="width: 18rem; height: 18rem; margin:1rem;">
-    <img src="{{review.image_url}}" alt="" />
+    {% if review.image %}
+      <img src="{{review.image.url}}" class="object-fit-cover overflow-hidden"/>
+    {% endif %}
     <div class="card-body d-flex flex-column justify-content-between">
       <p class="card-title">{{review.title | truncatechars_html:30}}</p>
       <a href="{{review.link}}" target="_blank" class="btn btn-primary">View</a>
+      <a hx-get="{% url 'moviereviews:update' review.id %}" hx-swap="innerHTML" hx-target="#update-modal-content" class="btn btn-primary">Update</a>
     </div>
   </div>
-  {% endfor %} 
+  {% endfor %}
 </div>
+
 <nav aria-label="Navigation" class="d-flex justify-content-center">
   <ul class="pagination">
-    <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+    <li 
+      class="page-item {% if not page_obj.has_previous %} disabled {% endif %}
+    ">
       <a class="page-link" href="?page=1" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>

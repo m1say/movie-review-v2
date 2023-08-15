@@ -13,12 +13,17 @@ import os
 import environ
 from pathlib import Path
 
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-PROJECT_DIR = Path(__file__).resolve().parent
+APPS_DIR = BASE_DIR / "main"
+
 env = environ.Env()
 
-READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=DEBUG)
 if READ_DOT_ENV_FILE:
     env.read_env(BASE_DIR / ".env")
 
@@ -28,11 +33,11 @@ if READ_DOT_ENV_FILE:
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-r)%@jopta(rez)m5iek+3+-8$b5tupl1+349f+*g!wg7x-d%f&"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -46,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "crispy_bootstrap5",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +62,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "main.urls"
@@ -63,7 +70,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(PROJECT_DIR, "templates"),
+            os.path.join(APPS_DIR, "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -126,6 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_ROOT = str(APPS_DIR / "media")
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -135,8 +144,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # NY Times API
 NY_TIMES_HOST = env("NY_TIMES_HOST", default="https://api.nytimes.com/")
 NY_TIMES_API_KEY = env("NY_TIMES_API_KEY", default="")
-
-print(NY_TIMES_HOST)
+NY_TIMES_DATA_LIMIT = env.int("NY_TIMES_DATA_LIMIT", default=None)
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"

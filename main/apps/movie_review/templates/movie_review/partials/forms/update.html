@@ -1,0 +1,35 @@
+{% load crispy_forms_tags %}
+
+<div 
+  class="modal fade" 
+  tabindex="-1" 
+  id="update-modal"
+  aria-labelledby="update-modal-label" 
+  aria-hidden="true"
+  _="on closeModal trigger search then $('#update-modal').modal('hide')"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 
+          class="modal-title fs-5" 
+          id="update-modal-label"
+        >
+          Update Movie Review
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="modal-close"
+        >
+        </button>
+      </div>
+      <div id="update-modal-content" hx-on::after-swap="$('#update-modal').modal('show')"></div>
+    </div>
+  </div>
+</div>
+
+{% block javascript %}
+{% endblock%}
