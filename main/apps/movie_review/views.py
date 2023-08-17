@@ -1,17 +1,28 @@
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, UpdateView
 from main.apps.movie_review.forms import MovieReviewForm
 from main.apps.movie_review.models import MovieReview
 from django.template.context_processors import csrf
 from crispy_forms.utils import render_crispy_form
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
+from django.core.paginator import Paginator
+from django.template.loader import render_to_string
+
+
+class CustomPaginator(Paginator):
+    def validate_number(self, number):
+        if isinstance(number, str) and number == "last":
+            number = self.num_pages
+        return super().validate_number(number)
 
 
 class IndexView(ListView):
     template_name = "movie_review/index.html"
     context_object_name = "reviews"
     model = MovieReview
-    paginate_by = 12
+    paginate_by = 9
+    paginator_class = CustomPaginator
 
     def get_context_data(self, **kwargs):
         kwargs["form"] = MovieReviewForm()
@@ -34,10 +45,20 @@ class MovieReviewCreateView(CreateView):
 
         context = self.get_context_data()
         context.update(csrf(self.request))
+
         form = MovieReviewForm()
         form_html = render_crispy_form(form, context=context)
+        toast_html = render_to_string(
+            template_name="movie_review/partials/toast.html",
+            context={
+                "action": "Success!",
+                "message": f"Successfully created {self.object.title}.",
+            },
+            request=self.request,
+        )
 
-        response = HttpResponse(form_html)
+        content = toast_html + form_html
+        response = HttpResponse(content)
         response["HX-Trigger"] = "closeModal"
         return response
 
@@ -59,17 +80,25 @@ class MovieReviewUpdateView(MovieReviewCreateView, UpdateView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
+
         context = super().get_context_data()
         context.update(csrf(request))
         form_html = render_crispy_form(context["form"], context=context)
-
         response = HttpResponse(form_html)
         return response
 
     def form_valid(self, form):
         super().form_valid(form)
 
-        response = HttpResponse()
+        response = render(
+            self.request,
+            "movie_review/partials/toast.html",
+            context={
+                "action": "Success!",
+                "message": f"Successfully updated {self.object.title}.",
+            },
+        )
         response["HX-Trigger"] = "closeModal"
-        response["HX-Reswap"] = "none"
+        response["HX-Reswap"] = "beforeend"
+        response["HX-Retarget"] = "#toasts"
         return response

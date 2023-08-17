@@ -1,0 +1,15 @@
+<div hx-swap-oob="beforeend:#toasts">
+  <div
+    class="toast fade show" 
+    role="alert" 
+    aria-live="assertive" 
+    aria-atomic="true" 
+    _="on load wait 3000ms then transition opacity to 0 then remove me"
+  >
+    <div class="toast-header">
+      <strong class="me-auto">{{ action }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">{{ message }}</div>
+  </div>
+</div>

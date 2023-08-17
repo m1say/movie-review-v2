@@ -1,15 +1,14 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 
 {% block title %} Movie Reviews {% endblock %} 
 {% block content %}
-<div class="d-flex justify-content-between p-2">
+<div class="d-flex justify-content-between py-3 align-items-center">
   <div class="d-inline-flex">
-    <label for="search-title" class="my-2"> 
-      Search:
-    </label>
-    <input 
+      <input 
       id="search-title"
-      class="form-control mx-1" 
+      class="form-control rounded-pill"
+      style="width: 16rem;"
+      placeholder="Search movie title..."
       type="search" 
       name="title"
       hx-get="{% url 'moviereviews:search' %}"
@@ -17,17 +16,17 @@
       hx-target="#review-list"
       hx-indicator=".htmx-indicator"
     >
-    <span class="htmx-indicator my-2"> 
-      Searching... 
-    </span> 
+    <div class="htmx-indicator spinner-border ms-2 text-secondary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
-  <button 
+  <button
     type="button" 
-    class="btn btn-primary" 
+    class="btn btn-primary rounded-pill"
     data-bs-toggle="modal" 
-    data-bs-target="#modal" 
+    data-bs-target="#modal"
   >
-    Create review
+    Create
   </button>
 </div>
 <div id="review-list">

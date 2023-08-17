@@ -15,19 +15,79 @@
     <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
   </head>
   <body>
-    <main>
-      <div class="container-fluid">
-        <nav class="navbar navbar-light bg-light p-2">
-          <a class="navbar-brand" href="{% url 'moviereviews:index' %}">
-            <img src="{% static 'movie_review/popcorn.png' %}" width="30" height="30" class="d-inline-block align-top mx-2" alt="popcorn">
-            Movie Reviews
-          </a>
-        </nav>
+    <header data-bs-theme="dark">
+      <div class="navbar navbar-dark bg-dark shadow-sm">
         <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <img src="{% static 'movie_review/popcorn.png' %}" width="20" height="20" class="d-inline-block align-top mx-2" alt="popcorn">
+            <strong>Reviews</strong>
+          </a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Movie Reviews</h1>
+            <p class="lead text-body-secondary">A programming exercise using the NY Times API: Movie Reviews</p>
+            <p>
+              <a href="#" class="btn btn-primary my-2">Github</a>
+              <a href="#" class="btn btn-secondary my-2">Linkedin</a>
+            </p>
+          </div>
+        </div>
+      </section>
+      <div id="movie-reviews" class="container-fluid bg-body-tertiary bg-secondary-subtle bg-dark-subtle bg-light">
+        <div class="container pt-2 pb-4">
           {% block content %} {% endblock %}
         </div>
       </div>
+      <div id="toasts" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
       {% block javascript %}{% endblock %}
     </main>
+    <footer>
+      <div class="container px-4 py-5" id="hanging-icons">
+        <!-- <h2 class="pb-2 border-bottom">Hanging icons</h2> -->
+        <div class="border-top row g-4 py-5 row-cols-1 row-cols-lg-3">
+          <div class="col d-flex align-items-start">
+            <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+            </div>
+            <div>
+              <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+              <a href="#" class="btn btn-primary">
+                Primary button
+              </a>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
+            </div>
+            <div>
+              <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+              <a href="#" class="btn btn-primary">
+                Primary button
+              </a>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"></use></svg>
+            </div>
+            <div>
+              <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+              <a href="#" class="btn btn-primary">
+                Primary button
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
