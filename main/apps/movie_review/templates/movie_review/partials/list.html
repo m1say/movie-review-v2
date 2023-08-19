@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filters %}
 
 {% if reviews %}
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -25,7 +26,7 @@
               Edit
             </button>
           </div>
-            <small class="text-body-secondary"> Created {{ review.publication_date|timesince }} ago</small>
+            <small class="text-body-secondary"> Created {{ review.publication_date|biggest_timesince }} ago</small>
         </div>
       </div>
     </div>
@@ -38,7 +39,7 @@
   <ul class="pagination mt-4 mb-0">
     <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
       <button
-        class="page-link"
+        class="page-link {% if page_obj.has_previous %} text-dark {% endif %}"
         hx-get="{% url 'moviereviews:search' %}?page=1"
         hx-include="#search-title"
         hx-target="#review-list"
@@ -49,7 +50,7 @@
     </li>
     <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
       <button
-        class="page-link" 
+        class="page-link {% if page_obj.has_previous %} text-dark {% endif %}" 
         hx-get="{% url 'moviereviews:search' %}?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}"
         hx-target="#review-list"
         hx-include="#search-title"
@@ -58,10 +59,10 @@
         Previous
       </button>
     </li>
-    <li class="page-item"><button class="page-link ">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</button></li>
-    <li class="page-item  {% if not page_obj.has_next %} disabled {% endif %}">
+    <li class="page-item"><button class="page-link text-dark">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</button></li>
+    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
       <button
-        class="page-link" 
+        class="page-link {% if page_obj.has_next %} text-dark {% endif %}" 
         hx-get="{% url 'moviereviews:search' %}?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}"
         hx-target="#review-list"
         hx-include="#search-title"
@@ -70,9 +71,9 @@
         Next
       </button>
     </li>
-    <li class="page-item">
+    <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
       <button
-        class="page-link" 
+        class="page-link {% if page_obj.has_next %} text-dark {% endif %}"
         hx-get="{% url 'moviereviews:search' %}?page=last"
         hx-target="#review-list"
         hx-include="#search-title"

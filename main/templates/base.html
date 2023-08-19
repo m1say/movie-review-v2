@@ -32,8 +32,8 @@
             <h1 class="fw-light">Movie Reviews</h1>
             <p class="lead text-body-secondary">A programming exercise using the NY Times API: Movie Reviews</p>
             <p>
-              <a href="#" class="btn btn-primary my-2">Github</a>
-              <a href="#" class="btn btn-secondary my-2">Linkedin</a>
+              <a href="#" class="btn btn-dark my-2">Github</a>
+              <a href="#" class="btn btn-outline-dark my-2">Linkedin</a>
             </p>
           </div>
         </div>
@@ -48,44 +48,53 @@
     </main>
     <footer>
       <div class="container px-4 py-5" id="hanging-icons">
-        <!-- <h2 class="pb-2 border-bottom">Hanging icons</h2> -->
-        <div class="border-top row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <h4 class="">built with~</h4>
+
+        <div class="row g-4 mb-5 row-cols-1 row-cols-lg-3">
+
           <div class="col d-flex align-items-start">
             <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+              <img src="{% static 'movie_review/htmx.png' %}" alt="bootstrap-icon" width="55" height="40">
             </div>
             <div>
-              <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-              <a href="#" class="btn btn-primary">
-                Primary button
+              <h3 class="fs-2 text-body-emphasis">htmx</h3>
+              <p>htmx gives you access to AJAX, CSS Transitions, WebSockets and Server Sent Events directly in HTML, using attributes, so you can build modern user interfaces with the simplicity and power of hypertext
+              </p>
+              <a href="https://htmx.org/" target="_" class="btn btn-outline-dark">
+                Learn more
               </a>
             </div>
           </div>
+
           <div class="col d-flex align-items-start">
             <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
+              <img src="{% static 'movie_review/django.webp' %}" alt="bootstrap-icon" width="40" height="40">
             </div>
             <div>
-              <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-              <a href="#" class="btn btn-primary">
-                Primary button
+              <h3 class="fs-2 text-body-emphasis">django</h3>
+              <p>Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design. It’s free and open source.
+
+              </p>
+              <a href="https://www.djangoproject.com/" target="_" class="btn btn-outline-dark">
+                Learn more
               </a>
             </div>
           </div>
+
           <div class="col d-flex align-items-start">
             <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-              <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"></use></svg>
+              <img src="{% static 'movie_review/bootstrap.png' %}" alt="bootstrap-icon" width="48" height="40">
             </div>
             <div>
-              <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-              <a href="#" class="btn btn-primary">
-                Primary button
+              <h3 class="fs-2 text-body-emphasis">bootstrap</h3>
+              <p>Powerful, extensible, and feature-packed frontend toolkit.
+              </p>
+              <a href="https://getbootstrap.com/" target="_" class="btn btn-outline-dark">
+                Learn more
               </a>
             </div>
           </div>
+          
         </div>
       </div>
     </footer>
