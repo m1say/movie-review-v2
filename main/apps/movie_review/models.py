@@ -1,8 +1,12 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
 
 class MovieReview(models.Model):
+    created_by = models.ForeignKey(
+        User, related_name="movie_reviews", on_delete=models.CASCADE, null=True
+    )
     title = models.CharField(max_length=200)
     headline = models.TextField(null=True, blank=True)
     summary = models.TextField(null=True, blank=True)

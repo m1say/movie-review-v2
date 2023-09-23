@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %} Movie Reviews {% endblock %} 
+{% block title %} Movie Reviews {% endblock %}
 {% block content %}
 <div class="d-flex justify-content-between py-3 align-items-center">
   <div class="d-inline-flex">
-      <input 
+      <input
       id="search-title"
       class="form-control rounded-pill border-dark"
       style="width: 16rem;"
       placeholder="Search movie title..."
-      type="search" 
+      type="search"
       name="title"
       hx-get="{% url 'moviereviews:search' %}"
-      hx-trigger="keyup changed delay:100ms, search from:body" 
+      hx-trigger="keyup changed delay:100ms, search from:body"
       hx-target="#review-list"
       hx-indicator=".htmx-indicator"
     >
@@ -20,14 +20,16 @@
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
+  {% if user.is_authenticated %}
   <button
-    type="button" 
+    type="button"
     class="btn btn-dark rounded-pill"
-    data-bs-toggle="modal" 
+    data-bs-toggle="modal"
     data-bs-target="#modal"
   >
     Create
   </button>
+  {% endif %}
 </div>
 <div id="review-list">
   {% include 'movie_review/partials/list.html' %}

@@ -1,13 +1,15 @@
+from crispy_forms.utils import render_crispy_form
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.template.context_processors import csrf
+from django.template.loader import render_to_string
 from django.urls import reverse
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView
+
 from main.apps.movie_review.forms import MovieReviewForm
 from main.apps.movie_review.models import MovieReview
-from django.template.context_processors import csrf
-from crispy_forms.utils import render_crispy_form
-from django.http import HttpResponse
-from django.core.paginator import Paginator
-from django.template.loader import render_to_string
 
 
 class CustomPaginator(Paginator):
@@ -37,11 +39,14 @@ class SearchView(IndexView):
         return MovieReview.objects.filter(title__icontains=title)
 
 
-class MovieReviewCreateView(CreateView):
+class MovieReviewCreateView(LoginRequiredMixin, CreateView):
     form_class = MovieReviewForm
 
     def form_valid(self, form):
-        super().form_valid(form)
+        self.object = form.save(commit=False)
+        if form.instance and form.instance.pk:
+            self.object.created_by = self.request.user
+        self.object.save()
 
         context = self.get_context_data()
         context.update(csrf(self.request))

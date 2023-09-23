@@ -1,12 +1,13 @@
-import logging
-from main.celery import app
-from django.conf import settings
-from main.utils.api_client import NYTimesAPIClient
-from main.apps.movie_review.models import MovieReview
 import base64
+import logging
+
 import requests
+from django.conf import settings
 from django.core.files.base import ContentFile
 
+from main.apps.movie_review.models import MovieReview
+from main.celery import app
+from main.utils.api_client import NYTimesAPIClient
 
 logger = logging.getLogger(__name__)
 

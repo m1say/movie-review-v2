@@ -1,0 +1,7 @@
+[tool.isort]
+profile = "django"
+combine_as_imports = true
+include_trailing_comma = true
+line_length = 120
+[flake8]
+max-line-length=120

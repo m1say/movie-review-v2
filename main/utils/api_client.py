@@ -1,14 +1,14 @@
 import logging
-from time import sleep
-from django.conf import settings
-import requests
 import re
+from time import sleep
+
+import requests
+import requests_mock
+from django.conf import settings
 from requests import HTTPError
 from requests.adapters import HTTPAdapter
-from urllib3 import Retry
-import requests_mock
 from requests_mock.response import create_response
-
+from urllib3 import Retry
 
 logger = logging.getLogger(__name__)
 
@@ -41,19 +41,19 @@ class MovieReviewMocker:
                     "mpaa_rating": "R",
                     "critics_pick": 1,
                     "byline": "Danielle Dowling",
-                    "headline": "‘The Venture Bros.: Radiant Is the Blood of the Baboon Heart’ Review: Return of the Glorious Weirdos",
+                    "headline": "‘The Venture Bros.: Radiant Is the Blood of the Baboon Heart’ Review: Return of the Glorious Weirdos",  # noqa ES01
                     "summary_short": "A beloved Adult Swim cartoon comes back to tie up some loose ends.",
                     "publication_date": "2023-07-20",
                     "opening_date": "2023-07-21",
                     "date_updated": "2023-07-20 21:04:34",
                     "link": {
                         "type": "article",
-                        "url": "https://www.nytimes.com/2023/07/20/movies/the-venture-bros-radiant-is-the-blood-of-the-baboon-heart-review.html",
-                        "suggested_link_text": "Read the New York Times Review of The Venture Bros.: Radiant Is the Blood of the Baboon Heart",
+                        "url": "https://www.nytimes.com/2023/07/20/movies/the-venture-bros-radiant-is-the-blood-of-the-baboon-heart-review.html",  # noqa ES01
+                        "suggested_link_text": "Read the New York Times Review of The Venture Bros.: Radiant Is the Blood of the Baboon Heart",  # noqa ES01
                     },
                     "multimedia": {
                         "type": "mediumThreeByTwo210",
-                        "src": "https://static01.nyt.com/images/2023/07/20/multimedia/20venture-bros-art-2-ghvc/20venture-bros-art-2-ghvc-mediumThreeByTwo440.jpg",
+                        "src": "https://static01.nyt.com/images/2023/07/20/multimedia/20venture-bros-art-2-ghvc/20venture-bros-art-2-ghvc-mediumThreeByTwo440.jpg",  # noqa ES01
                         "height": 140,
                         "width": 210,
                     },

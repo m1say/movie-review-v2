@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
-import environ
 from pathlib import Path
 
+import environ
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -136,6 +136,10 @@ STATIC_URL = "static/"
 MEDIA_ROOT = str(APPS_DIR / "media")
 MEDIA_URL = "/media/"
 
+STATICFILES_DIRS = [
+    APPS_DIR / "static",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -148,3 +152,7 @@ NY_TIMES_DATA_LIMIT = env.int("NY_TIMES_DATA_LIMIT", default=None)
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Authentication
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

@@ -7,7 +7,7 @@
   <div class="col card-group">
     <div class="card shadow-sm overflow-hidden">
       {% if review.image %}
-        <img src="{{review.image.url}}" class="card-img-top" style="height: 12rem;"/>
+        <img src='{{review.image.url}}' class="card-img-top" style="height: 12rem;"/>
       {% else %}
         <img src="{% static 'movie_review/empty.png' %}" class="card-img-top" style="height: 12rem;"/>
       {% endif %}
@@ -17,10 +17,10 @@
         <div class="d-flex justify-content-between align-items-center">
           <div class="btn-group">
             <a href="{{review.link}}" target="_blank" class="btn btn-sm btn-outline-secondary">View</a>
-            <button 
+            <button
               hx-get="{% url 'moviereviews:update' review.id %}"
-              hx-swap="innerHTML" 
-              hx-target="#update-modal-content" 
+              hx-swap="innerHTML"
+              hx-target="#update-modal-content"
               class="btn btn-sm btn-outline-secondary"
             >
               Edit
@@ -50,7 +50,7 @@
     </li>
     <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
       <button
-        class="page-link {% if page_obj.has_previous %} text-dark {% endif %}" 
+        class="page-link {% if page_obj.has_previous %} text-dark {% endif %}"
         hx-get="{% url 'moviereviews:search' %}?page={% if page_obj.has_previous %}{{ page_obj.previous_page_number }}{% endif %}"
         hx-target="#review-list"
         hx-include="#search-title"
@@ -62,7 +62,7 @@
     <li class="page-item"><button class="page-link text-dark">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</button></li>
     <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
       <button
-        class="page-link {% if page_obj.has_next %} text-dark {% endif %}" 
+        class="page-link {% if page_obj.has_next %} text-dark {% endif %}"
         hx-get="{% url 'moviereviews:search' %}?page={% if page_obj.has_next %}{{ page_obj.next_page_number }}{% endif %}"
         hx-target="#review-list"
         hx-include="#search-title"
