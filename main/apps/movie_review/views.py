@@ -43,9 +43,8 @@ class MovieReviewCreateView(LoginRequiredMixin, CreateView):
     form_class = MovieReviewForm
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        if form.instance and form.instance.pk:
-            self.object.created_by = self.request.user
+        self.object = form.save()
+        self.object.created_by = self.request.user
         self.object.save()
 
         context = self.get_context_data()
@@ -93,7 +92,7 @@ class MovieReviewUpdateView(MovieReviewCreateView, UpdateView):
         return response
 
     def form_valid(self, form):
-        super().form_valid(form)
+        self.object = form.save()
 
         response = render(
             self.request,
